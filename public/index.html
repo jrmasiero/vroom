@@ -80,7 +80,7 @@
   let myVideox = this.myVideo.object3D.position;
   let distance = playerx.distanceTo(myVideox);
   
-  console.log(distance);
+  //console.log(distance);
    var myVideo = document.querySelector('#video');   
       
   if (distance < 5.0) {
@@ -162,8 +162,29 @@
       });
     </script>
 
+    <script>
+       function onSceneLoad() {
+        var username = 'user-' + makeId(5).toLowerCase();
+        username = prompt('Choose a username', username);
+        var player = document.getElementById('player');
+        var myNametag = player.querySelector('.nametag');
+        myNametag.setAttribute('text', 'value', username);
+
+        //document.querySelector('a-scene').components['networked-scene'].connect();
+      }
+      
+      function makeId(length) {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < length; i++)
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+      }
+    </script>
   </head>
-  <body>
+  <body onload="onSceneLoad()">
     <a-scene networked-scene="
       room: nafvideotransport;
       adapter: easyrtc;
@@ -206,6 +227,19 @@
         <!-- Avatar -->
         <template id="avatar-template">
           <a-entity class="avatar" networked-audio-source>
+            <!--a-text class="nametag"
+              color="white"
+              value="nome"
+              position="0 1 0"
+            ></a-text-->
+            <a-entity class="nametag" 
+                      text="value: Hello World;color: blue; align:center;side:double;" 
+                      position="0 0.7 0" 
+                      rotation="0 180 0" 
+                      scale="8 8 8"
+                      
+                      
+            ></a-entity>
             <a-sphere class="head"
               color="#5985ff"
               scale="0.45 0.5 0.4"
@@ -248,7 +282,9 @@
 
 
 
-      <a-entity dist_volume id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" position="-3 1.5 2" camera spawn-in-circle="radius:3;" wasd-controls look-controls="pointerLockEnabled: true">
+      <a-entity dist_volume id="player" 
+                networked="template:#avatar-template;attachTemplateToLocal:false;" position="7 1.5 35" camera spawn-in-circle="radius:3;" wasd-controls look-controls="pointerLockEnabled: true">
+        <a-entity class="nametag"></a-entity>
         <a-sphere class="head"
           visible="false"
           random-color
@@ -356,6 +392,11 @@
             selector: '.head',
             component: 'material',
             property: 'color'
+          },
+          {
+            selector: '.nametag',
+            component: 'text',
+            property: 'value'
           }
         ]
       });
@@ -440,7 +481,73 @@
       }
     </script>
 
+    <script>
 
+  let posX = [];
+  let posY = [];
+  let posZ = [];
+  
+  let cena = document.querySelector('a-scene');
+  
+  let quantidade = 25;
+  //let elemento = [];
+  let elemento_2 = [];
+  
+  
+  function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+  
+  
+objetos_3d(quantidade);  
+  
+function objetos_3d(quant){
+  
+  //let pos_y_variavel = -0.1;
+  //let pos_x_variavel = 2;
+  
+  
+  let repete = 25;
+  
+  
+  for(var j = 0; j < repete; j++){
+    
+    //n =  j * n;
+    
+  for(var i = 0; i < quant; i++){
+  
+  elemento_2[i] = document.createElement('a-box');  
+  elemento_2[i].setAttribute("id","a2"+i);  
+  //elemento[i].setAttribute("animation-test");
+  //elemento_2[i].setAttribute("src","#cadeira")
+  elemento_2[i].setAttribute("scale","0.4 0.4 0.4")
+  //elemento_2[i].setAttribute("radius-top","0")  
+  elemento_2[i].setAttribute("color","gray")    
+  //elemento[i].setAttribute("material","color:#42daff; metalness:0.9; roughness: 0.05; sphericalEnvMap: #chrome;");
+  elemento_2[i].setAttribute("rotation", "0 0 0");
+    
+  //elemento_2[i].setAttribute("vertex-c", "10 -10 0");  
+  //elemento[i].setAttribute("animation-mixer","loop: once");
+  
+  //posY[i] = 0; 
+  //posZ[i] = (-5) + i*(-4);
+  posZ[i]= 200 + (i*(-15));
+  posX[i] = -130 + (j*15);
+  posY[i] = 15;
+
+    
+    
+  
+  elemento_2[i].setAttribute("position", (posX[i]/10)+" "+ 6 +" "+(posZ[i]/10));  
+  
+  //cena.appendChild(elemento[i]);
+  cena.appendChild(elemento_2[i]);
+  
+  }
+
+}  
+}
+    </script>
 
 
 
