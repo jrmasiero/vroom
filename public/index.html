@@ -16,6 +16,8 @@
     <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
     <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
 
+    <script src="https://unpkg.com/aframe-textarea-component/dist/aframe-textarea-component.min.js"></script>
+    
     <script src="video-transport.js"></script>
 
     <script>
@@ -217,7 +219,7 @@
             <a-video video-transport class="front" material="side:front"
               src="#video"></a-video>
             <a-plane class="back" rotation="0 180 0" material="color:red;side:front"
-              text="align:center;wrapCount:8;value:Hi back"></a-plane>
+              text="align:center;wrapCount:8;value: Carregando..."></a-plane>
           </a-entity>
 
 
@@ -370,7 +372,8 @@
 
       <a-entity gltf-model="#sala"  telesurface position="0 0 0" scale="1 1 1" shadow="cast:true; receive:true"></a-entity>
 
-
+      <a-entity  position="7 1.5 25" textarea="cols: 20; rows: 10; text: Deixe aqui um recado. textarea; backgroundColor: #01579b; color: white; disabledBackgroundColor: red; disabled: false;"></a-entity>
+      
     </a-scene>
 
     <script>
